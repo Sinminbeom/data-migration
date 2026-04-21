@@ -1,0 +1,20 @@
+services:
+  data-migration:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: data-migration
+    networks:
+      - infra-glue
+    environment:
+      - TZ=Asia/Seoul
+    restart: always
+    tty: true
+    volumes:
+      - ./logs:/app/logs
+
+networks:
+  infra-glue:
+    driver: bridge
+    external: true
+    internal: true
