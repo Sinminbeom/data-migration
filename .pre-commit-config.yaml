@@ -1,0 +1,35 @@
+repos:
+  # Ruff - Fast Python linter and formatter (using uv run)
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff (uv run)
+        entry: uv run ruff check --fix
+        language: system
+        types_or: [python, pyi]
+      - id: ruff-format
+        name: ruff-format (uv run)
+        entry: uv run ruff format
+        language: system
+        types_or: [python, pyi]
+
+  # Pyright - Type checking (using uv run)
+  - repo: local
+    hooks:
+      - id: pyright
+        name: pyright (uv run)
+        entry: uv run pyright
+        language: system
+        files: \.py$
+
+  # Pre-commit built-in hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+      - id: check-json
+      - id: check-toml
+      - id: detect-private-key
+      - id: check-merge-conflict

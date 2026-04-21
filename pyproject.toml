@@ -1,0 +1,20 @@
+[project]
+name = "data-migration"
+version = "0.1.0"
+description = "S3 to S3 data migration tool"
+requires-python = ">=3.11"
+dependencies = [
+    "python-library",
+]
+
+[tool.uv.sources]
+python-library = { path = "libs/python_library-2.2.7-py3-none-any.whl" }
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.4.0",
+    "pyright>=1.1.407",
+    "pytest>=9.0.0",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.4",
+]
