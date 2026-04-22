@@ -1,19 +1,34 @@
+import time
 from abc import abstractmethod
 from datetime import datetime
 from typing import Dict, List, Optional
 import json
 
-from python_library.job_queue.job_queue import JobQueue
+from python_library.job.job import IJob
 from python_library.logger.app_logger import AppLogger
 from python_library.storage.s3.s3_storage_factory import S3StorageFactory
 from python_library.storage.s3.s3_storage_info_factory import S3StorageInfoFactory
 from python_library.storage.storage import IStorage
 from python_library.storage.storage_file import StorageFile
 from python_library.thread.multi_thread_manager import MultiThreadManager
-from python_library.thread.worker_thread import WorkThread
+from python_library.thread.worker_thread import QueueThreading
 
 from src.config.project_config import ProjectConfig
 from meta_data.meta_json import MetaJson
+
+
+class WorkThread(QueueThreading):
+    def action(self) -> None:
+        time.sleep(0.001)
+        job: IJob | None = self.pop_shared_job_queue()
+        if job is None:
+            return
+        job.execute()
+
+
+class MigrationManager(MultiThreadManager):
+    def action(self) -> None:
+        pass
 
 
 class abMigration:
@@ -27,8 +42,7 @@ class abMigration:
         self.src_storage: Optional[IStorage] = None
         self.dst_storage: Optional[IStorage] = None
 
-        self.multi_thread_manager = MultiThreadManager()
-        self.job_queue = JobQueue()
+        self.multi_thread_manager = MigrationManager()
 
         self.meta_json_dict: Dict[str, MetaJson] = dict()
 
@@ -37,8 +51,8 @@ class abMigration:
 
     def _init_threads(self) -> None:
         thread_count = int(ProjectConfig.instance().thread_count)
-        for count in range(thread_count):
-            self.multi_thread_manager.append(WorkThread(self.job_queue))
+        for _ in range(thread_count):
+            self.multi_thread_manager.append(WorkThread())
 
     def _init_storage(self) -> None:
         src_storage_factory = S3StorageFactory(S3StorageInfoFactory())

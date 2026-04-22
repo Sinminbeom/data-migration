@@ -275,7 +275,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "python-library", path = "libs/python_library-2.2.7-py3-none-any.whl" }]
+requires-dist = [{ name = "python-library", path = "libs/python_library-2.2.8-py3-none-any.whl" }]
 
 [package.metadata.requires-dev]
 dev = [
@@ -529,8 +529,8 @@ wheels = [
 
 [[package]]
 name = "python-library"
-version = "2.2.7"
-source = { path = "libs/python_library-2.2.7-py3-none-any.whl" }
+version = "2.2.8"
+source = { path = "libs/python_library-2.2.8-py3-none-any.whl" }
 dependencies = [
     { name = "argon2-cffi" },
     { name = "boto3" },
@@ -538,7 +538,7 @@ dependencies = [
     { name = "rich" },
 ]
 wheels = [
-    { filename = "python_library-2.2.7-py3-none-any.whl", hash = "sha256:01e8f3640dae73a2b84268740be84bae1ae8f4feaba2fc2991903ed57e35c11c" },
+    { filename = "python_library-2.2.8-py3-none-any.whl", hash = "sha256:bb4d588951466f8c535783a53c46d69f2a5872ceaea1a5783ddf31b8cc68f4af" },
 ]
 
 [package.metadata]

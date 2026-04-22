@@ -41,7 +41,7 @@ class LocalStagingMigration(RoundRobinMigration):
             if self.src_storage is None or self.dst_storage is None:
                 raise RuntimeError("storage is not initialized")
 
-            self.job_queue.append(
+            self.multi_thread_manager.push_shared_job_queue(
                 LocalStagingMigrationJob(
                     self.src_storage, file_path, local_path, self.dst_storage, dst_path
                 )
