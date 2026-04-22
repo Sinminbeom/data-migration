@@ -8,7 +8,7 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-python-library = { path = "libs/python_library-2.2.7-py3-none-any.whl" }
+python-library = { path = "libs/python_library-2.2.8-py3-none-any.whl" }
 
 [dependency-groups]
 dev = [

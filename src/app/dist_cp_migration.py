@@ -34,6 +34,6 @@ class DistCpMigration(abMigration):
             if self.src_storage is None or self.dst_storage is None:
                 raise RuntimeError("storage is None")
 
-            self.job_queue.append(
+            self.multi_thread_manager.push_shared_job_queue(
                 DistCpMigrationJob(self.src_storage, src_path, dst_path)
             )
