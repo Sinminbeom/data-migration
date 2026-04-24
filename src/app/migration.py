@@ -11,7 +11,7 @@ from python_library.storage.s3.s3_storage_info_factory import S3StorageInfoFacto
 from python_library.storage.storage import IStorage
 from python_library.storage.storage_file import StorageFile
 from python_library.thread.multi_thread_manager import MultiThreadManager
-from python_library.thread.worker_thread import QueueThreading
+from python_library.thread.queue_thread import QueueThreading
 
 from src.config.project_config import ProjectConfig
 from meta_data.meta_json import MetaJson
